@@ -1,0 +1,12 @@
+model_name: "cogvideo"
+model_path: "THUDM/CogVideoX1.5-5B"
+guidance_scale: 6.0
+num_inference_steps: 50
+num_frames: 81
+width: 1360
+height: 768
+fps: 16
+num_videos_per_prompt: 1
+dtype: "bfloat16"
+seed: 42
+use_dynamic_cfg: True

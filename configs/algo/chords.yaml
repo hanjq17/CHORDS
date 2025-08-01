@@ -1,0 +1,9 @@
+algo_name: "chords"
+num_cores: 8
+init_t: 0-2-4-8-16-24-32-40
+stopping_kwargs:
+  criterion: "core_index"
+  index: 1
+  threshold: 4e-4
+verbose: True
+full_return: True

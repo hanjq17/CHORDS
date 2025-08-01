@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+  - /algo: chords
+  - /model: hunyuan
+
+prompt_file: prompts/video_demo.txt
+output_base_path: output_samples/
+ngpu: 8
+
+

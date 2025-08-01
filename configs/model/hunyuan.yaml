@@ -1,0 +1,11 @@
+model_name: "hunyuan"
+model_path: "hunyuanvideo-community/HunyuanVideo"
+guidance_scale: 6.0
+num_inference_steps: 50
+num_frames: 129  # 129 61
+width: 960  # 1280 960
+height: 544  # 720 544
+fps: 24
+num_videos_per_prompt: 1
+dtype: "bfloat16"
+seed: 42

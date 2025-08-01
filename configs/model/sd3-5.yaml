@@ -1,0 +1,9 @@
+model_name: "sd3-5"
+model_path: "stabilityai/stable-diffusion-3.5-large"
+guidance_scale: 7.0
+height: 1024
+width: 1024
+num_inference_steps: 50
+num_images_per_prompt: 1
+dtype: "float16"
+seed: 42
