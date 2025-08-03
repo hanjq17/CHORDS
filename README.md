@@ -13,7 +13,7 @@ Jiaqi Han*, Haotian Ye*, Puheng Li, Minkai Xu, James Zou, Stefano Ermon
 
 In this work, we develop a general, training-free, and model-agnostic diffusion sampling acceleration strategy via multi-core parallelism. Our framework views multi-core diffusion sampling as an ODE solver pipeline, where slower yet accurate solvers progressively rectify faster solvers through a theoretically justified inter-core communication mechanism. Through extensive experiments, our algorithm CHORDS significantly accelerates sampling across diverse large-scale image and video diffusion models, yielding up to 2.1x speedup with four cores, improving by 50% over baselines, and 2.9x speedup with eight cores, all without quality degradation.
 
-<!-- ![Overview](assets/framework.png "Overview") -->
+<video src="https://github.com/hanjq17/hanjq17.github.io/blob/master/CHORDS/static/videos/chords-video.mp4" controls width="640"></video>
 
 ## Dependencies
 Our code relies on the following core packages:
