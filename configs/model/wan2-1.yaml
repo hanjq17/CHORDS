@@ -1,0 +1,11 @@
+model_name: "wan2-1"
+model_path: "Wan-AI/Wan2.1-T2V-14B-Diffusers"
+guidance_scale: 5.0
+num_inference_steps: 50
+num_frames: 81
+width: 832
+height: 480
+fps: 15
+num_videos_per_prompt: 1
+dtype: "bfloat16"
+seed: 42

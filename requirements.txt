@@ -8,3 +8,4 @@ hydra-core
 protobuf  # for flux
 imageio
 imageio-ffmpeg
+ftfy  # for wan2.1
