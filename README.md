@@ -14,9 +14,9 @@ Jiaqi Han*, Haotian Ye*, Puheng Li, Minkai Xu, James Zou, Stefano Ermon
 </div>
 
 
-## 🎯 Introduction
+## 🎯 Overview
 
-We develop CHORDS, a general training-free and model-agnostic diffusion sampling acceleration strategy via multi-core parallelism. CHORDS views diffusion sampling as multi-core ODE solver pipeline, where slower yet accurate solvers progressively rectify faster solvers through a theoretically justified inter-core communication mechanism.
+We develop CHORDS, a training-free and model-agnostic diffusion sampling acceleration strategy via multi-core parallelism. CHORDS views diffusion sampling as a multi-core pipeline, where slower yet accurate solvers progressively rectify faster solvers through a theoretically justified inter-core communication mechanism.
 
 CHORDS significantly accelerates sampling across diverse large-scale image and video diffusion models, yielding up to 2.1x speedup with four cores, improving by 50% over baselines, and 2.9x speedup with eight cores, all without quality degradation.
 
