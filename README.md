@@ -1,21 +1,29 @@
-# CHORDS: Diffusion Sampling Accelerator with Multi-core Hierarchical ODE Solvers (ICCV 2025)
+<div align=center>
+  
+# [ICCV 2025] *CHORDS*: Diffusion Sampling Accelerator with Multi-core Hierarchical ODE Solvers
 
 Jiaqi Han*, Haotian Ye*, Puheng Li, Minkai Xu, James Zou, Stefano Ermon
 
 **Stanford University**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hanjq17/CHORDS/blob/main/LICENSE)
-[![ArXiv](https://img.shields.io/static/v1?&logo=arxiv&label=Paper&message=Arxiv:CHORDS&color=B31B1B)](https://arxiv.org/abs/2507.15260)
+<p>
+<a href='https://arxiv.org/abs/2507.15260'><img src='https://img.shields.io/static/v1?&logo=arxiv&label=Paper&message=Arxiv:CHORDS&color=B31B1B'></a>
+<a href='https://hanjq17.github.io/CHORDS/'><img src='https://img.shields.io/badge/Project-Page-blue'></a>
+</p>
 
-**Project Website:** https://hanjq17.github.io/CHORDS/
+</div>
 
-## Introduction
 
-In this work, we develop a general, training-free, and model-agnostic diffusion sampling acceleration strategy via multi-core parallelism. Our framework views multi-core diffusion sampling as an ODE solver pipeline, where slower yet accurate solvers progressively rectify faster solvers through a theoretically justified inter-core communication mechanism. Through extensive experiments, our algorithm CHORDS significantly accelerates sampling across diverse large-scale image and video diffusion models, yielding up to 2.1x speedup with four cores, improving by 50% over baselines, and 2.9x speedup with eight cores, all without quality degradation.
+## 🎯 Introduction
+
+We develop CHORDS, a general training-free and model-agnostic diffusion sampling acceleration strategy via multi-core parallelism. CHORDS views diffusion sampling as multi-core ODE solver pipeline, where slower yet accurate solvers progressively rectify faster solvers through a theoretically justified inter-core communication mechanism.
+
+CHORDS significantly accelerates sampling across diverse large-scale image and video diffusion models, yielding up to 2.1x speedup with four cores, improving by 50% over baselines, and 2.9x speedup with eight cores, all without quality degradation.
 
 ![Overview](assets/chords-video.gif "Overview")
 
-## Dependencies
+## 🛠 Dependencies
+
 Our code relies on the following core packages:
 ```
 torch
@@ -32,15 +40,18 @@ conda activate chords
 pip install -r requirements.txt
 ```
 
-## Running Inference
+## 🚀 Running Inference
 
-Prior to running inference pipeline, please make sure that the models have been downloaded from huggingface. We provide the download script for some example models for both image and video generation in `download.py`.
+Prior to running inference pipeline, please make sure that the models have been downloaded from 🤗 huggingface. We provide the download script for some example models for both image and video generation in `download.py`.
 
 
 We use hydra to organize different hyperparameters for the image/video diffusion model as well as the sampling algorithm. The default configurations can be found under `configs` folder. The entries to launch the sampling for image and video generation are `run_image_mp.py` and `run_video_mp.py`, respectively.
 
-### Image Generation
+
+### Text-to-Image (T2I)
+
 The command below is an example to perform image generation using Flux with our algorithm CHORDS on 8 GPUs.
+
 ```bash
 python run_image_mp.py \
     model=flux \
@@ -53,13 +64,29 @@ python run_image_mp.py \
     algo.stopping_kwargs.criterion=core_index \
     algo.stopping_kwargs.index=2
 ```
-For `model` we currently support `flux` (Flux) and `sd3-5` (Stable Diffusion 3.5-Large). `ngpu` corresponds to the number of GPUs to use in parallel. `output_base_path` is the directory to save the generated samples. `prompt_file` stores the list of prompts, each per line, that will be sequentially employed to generate each image.
 
-For the algorithm-related arguments, `algo.init_t` refers to the initialization sequence of CHORDS, as we have elaborated in the paper. `algo.num_cores` refers to the number of cores, where we currently designate one core as one GPU since it already almost reaches the compute bound, therefore it should equal to `ngpu`. `algorithm.stopping_kwargs` defines the early-stopping criteria, where `algo.stopping_kwargs.criterion` can be **(I)** `core_index`, which forces to return the output produced by the `algo.stopping_kwargs.index`-th fastest core, or **(II)** `residual`, which adaptively returns the output when the residual falls below certain `algo.stopping_kwargs.threshold`.
+For `model` we currently support:
+- `flux`: [Flux](https://huggingface.co/black-forest-labs/FLUX.1-dev)
+- `sd3-5`: [Stable Diffusion 3.5-Large](https://huggingface.co/stabilityai/stable-diffusion-3.5-large)
+
+ `ngpu` corresponds to the number of GPUs to use in parallel.
+ 
+ `output_base_path` is the directory to save the generated samples.
+ 
+ `prompt_file` stores the list of prompts, each per line, that will be sequentially employed to generate each image.
+
+`algo.init_t` refers to the initialization sequence of CHORDS, as we have elaborated in the paper.
+
+`algo.num_cores` refers to the number of cores, where we currently designate one core as one GPU since it already almost reaches the compute bound, therefore it should equal to `ngpu`.
+
+`algorithm.stopping_kwargs` defines the early-stopping criteria, where `algo.stopping_kwargs.criterion` can be 
+- `core_index`, which forces to return the output produced by the `algo.stopping_kwargs.index`-th fastest core. We recommend using 1 or 2.
+- `residual`, which adaptively returns the output when the residual falls below certain `algo.stopping_kwargs.threshold`
 
 For full functionality of the script, please refer to the arguments and their default values (such as the number of inference steps, the resolution of the image, etc.) under the `configs` folder, which will be automatically leveraged by hydra.
 
 We also provide the script for the single-core sequential sampling baseline to facilitate comparison as follows:
+
 ```bash
 python run_image_mp.py \
     model=flux \
@@ -69,9 +96,10 @@ python run_image_mp.py \
     algo=sequential
 ```
 
-### Video Generation
+### Text-to-Video (T2V)
 
 Similarly, the following script can be used for video generation with CHORDS:
+
 ```bash
 python run_video_mp.py \
     model=hunyuan \
@@ -84,9 +112,16 @@ python run_video_mp.py \
     algo.stopping_kwargs.criterion=core_index \
     algo.stopping_kwargs.index=1
 ```
-where for `model` we currently support `hunyuan` (HunyuanVideo) and `cogvideo` (CogVideo1.5X-5B).
+where for `model` we currently support:
+- `hunyuan` [HunyuanVideo](https://huggingface.co/hunyuanvideo-community/HunyuanVideo)
+- `wan2-1` [Wan2.1](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B-Diffusers)
+- `cogvideo` [CogVideo1.5X-5B](https://huggingface.co/zai-org/CogVideoX1.5-5B)
 
-## Citation
+We recommend using 1 or 2 for `algo.stopping_kwargs.index`. If the video quality does not meet expectation, you can try increasing `algo.stopping_kwargs.index` to a slightly larger integer value.
+
+
+## 📌 Citation
+
 Please consider citing our work if you find it useful:
 ```
 @article{han2025chords,
@@ -102,4 +137,6 @@ Please consider citing our work if you find it useful:
 If you have any question, welcome to contact me at:
 
 Jiaqi Han: jiaqihan@stanford.edu
+
+🧩 We warmly welcome **community contributions** for e.g. supporting more models!
 
