@@ -115,9 +115,9 @@ python run_video_mp.py \
     algo.stopping_kwargs.index=1
 ```
 where for `model` we currently support:
-- `hunyuan` [HunyuanVideo](https://huggingface.co/hunyuanvideo-community/HunyuanVideo)
-- `wan2-1` [Wan2.1](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B-Diffusers)
-- `cogvideo` [CogVideo1.5X-5B](https://huggingface.co/zai-org/CogVideoX1.5-5B)
+- `hunyuan`: [HunyuanVideo](https://huggingface.co/hunyuanvideo-community/HunyuanVideo)
+- `wan2-1`: [Wan2.1](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B-Diffusers)
+- `cogvideo`: [CogVideo1.5X-5B](https://huggingface.co/zai-org/CogVideoX1.5-5B)
 
 We recommend using 1 or 2 for `algo.stopping_kwargs.index`. If the video quality does not meet expectation, you can try increasing `algo.stopping_kwargs.index` to a slightly larger integer value.
 
