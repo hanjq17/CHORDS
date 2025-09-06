@@ -50,7 +50,7 @@ We use hydra to organize different hyperparameters for the image/video diffusion
 
 ### Text-to-Image (T2I)
 
-The command below is an example to perform image generation using Flux with our algorithm CHORDS on 8 GPUs.
+The command below is an example to perform image generation on Flux using CHORDS on 8 GPUs.
 
 ```bash
 python run_image_mp.py \
@@ -83,7 +83,7 @@ For `model` we currently support:
 - `core_index`, which forces to return the output produced by the `algo.stopping_kwargs.index`-th fastest core. We recommend using 1 or 2.
 - `residual`, which adaptively returns the output when the residual falls below certain `algo.stopping_kwargs.threshold`
 
-For full functionality of the script, please refer to the arguments and their default values (such as the number of inference steps, the resolution of the image, etc.) under the `configs` folder, which will be automatically leveraged by hydra.
+For full functionality of the script, please refer to the arguments and their default values (such as the number of inference steps, the resolution of the image, etc.) under the `configs` folder, which is parsed by hydra.
 
 We also provide the script for the single-core sequential sampling baseline to facilitate comparison as follows:
 
