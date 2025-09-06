@@ -138,5 +138,5 @@ If you have any question, welcome to contact me at:
 
 Jiaqi Han: jiaqihan@stanford.edu
 
-🔥 We warmly welcome **community contributions** for e.g. supporting more models!
+🔥 We warmly welcome **community contributions** for e.g. supporting more models! Please open/submit a PR if you are interested!
 
