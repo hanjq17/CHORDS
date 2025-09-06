@@ -132,11 +132,11 @@ Please consider citing our work if you find it useful:
 }
 ```
 
-## Contact
+## 🧩 Contact and Community Contribution
 
 If you have any question, welcome to contact me at:
 
 Jiaqi Han: jiaqihan@stanford.edu
 
-🧩 We warmly welcome **community contributions** for e.g. supporting more models!
+🔥 We warmly welcome **community contributions** for e.g. supporting more models!
 
