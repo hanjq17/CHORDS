@@ -20,6 +20,8 @@ We develop CHORDS, a training-free and model-agnostic diffusion sampling acceler
 
 CHORDS significantly accelerates sampling across diverse large-scale image and video diffusion models, yielding up to 2.1x speedup with four cores, improving by 50% over baselines, and 2.9x speedup with eight cores, all without quality degradation.
 
+Please give us a star ⭐ if you find our work interesting!
+
 ![Overview](assets/chords-video.gif "Overview")
 
 ## 🛠 Dependencies
@@ -48,7 +50,7 @@ Prior to running inference pipeline, please make sure that the models have been 
 We use hydra to organize different hyperparameters for the image/video diffusion model as well as the sampling algorithm. The default configurations can be found under `configs` folder. The entries to launch the sampling for image and video generation are `run_image_mp.py` and `run_video_mp.py`, respectively.
 
 
-### Text-to-Image (T2I)
+### ⭐ Text-to-Image (T2I)
 
 The command below is an example to perform image generation on Flux using CHORDS on 8 GPUs.
 
@@ -96,7 +98,7 @@ python run_image_mp.py \
     algo=sequential
 ```
 
-### Text-to-Video (T2V)
+### ⭐ Text-to-Video (T2V)
 
 Similarly, the following script can be used for video generation with CHORDS:
 
