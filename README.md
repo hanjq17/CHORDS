@@ -89,10 +89,11 @@ where for `model` we currently support `hunyuan` (HunyuanVideo) and `cogvideo` (
 ## Citation
 Please consider citing our work if you find it useful:
 ```
-@article{han2025chords,
+@inproceedings{han2025chords,
   title={CHORDS: Diffusion Sampling Accelerator with Multi-core Hierarchical ODE Solvers},
   author={Han, Jiaqi and Ye, Haotian and Li, Puheng and Xu, Minkai and Zou, James and Ermon, Stefano},
-  journal={arXiv preprint arXiv:2507.15260},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={19386--19395},
   year={2025}
 }
 ```
