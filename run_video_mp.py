@@ -4,7 +4,9 @@ from omegaconf import OmegaConf
 
 import torch
 from diffusers import (
-    HunyuanVideoPipeline, CogVideoXPipeline, CogVideoXDDIMScheduler,
+    HunyuanVideoPipeline,
+    WanPipeline, AutoencoderKLWan,
+    CogVideoXPipeline, CogVideoXDDIMScheduler,
 )
 
 from diffusers.utils import export_to_video
@@ -31,6 +33,13 @@ def generate_video(
     if model_config.model_name == 'hunyuan':
         pipe = HunyuanVideoPipeline.from_pretrained(model_config.model_path, torch_dtype=dtype)
         from snippets.hunyuan import (
+            forward_chords, forward_chords_worker,
+        )
+        from snippets.scheduler import custom_step_Euler as custom_step_flexible
+    elif model_config.model_name == 'wan2-1':
+        vae = AutoencoderKLWan.from_pretrained(model_config.model_path, subfolder="vae", torch_dtype=torch.float32)
+        pipe = WanPipeline.from_pretrained(model_config.model_path, vae=vae, torch_dtype=torch.bfloat16)
+        from snippets.wan2_1 import (
             forward_chords, forward_chords_worker,
         )
         from snippets.scheduler import custom_step_Euler as custom_step_flexible

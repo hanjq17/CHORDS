@@ -1,6 +1,6 @@
 from diffusers import (
     HunyuanVideoPipeline, CogVideoXPipeline,
-    StableDiffusion3Pipeline, FluxPipeline
+    StableDiffusion3Pipeline, FluxPipeline, WanPipeline,
 )
 
 
@@ -19,5 +19,11 @@ pipe = FluxPipeline.from_pretrained(model_path)
 model_path = "stabilityai/stable-diffusion-3.5-large"
 
 pipe = StableDiffusion3Pipeline.from_pretrained(model_path)
+
+model_path = "Wan-AI/Wan2.1-T2V-14B-Diffusers"
+
+pipe = WanPipeline.from_pretrained(model_path)
+
+
 
 print('done')
